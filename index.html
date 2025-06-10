@@ -21,20 +21,30 @@
   <script>
     async function translateToEnglish() {
       const text = document.getElementById("inputText").value;
+      if (!text.trim()) {
+        document.getElementById("result").innerText = "翻訳する文を入力してください。";
+        return;
+      }
 
-      const res = await fetch("https://libretranslate.de/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          q: text,
-          source: "ja",
-          target: "en",
-          format: "text"
-        })
-      });
+      try {
+        const res = await fetch("https://translate.argosopentech.com/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            q: text,
+            source: "ja",
+            target: "en",
+            format: "text"
+          })
+        });
 
-      const data = await res.json();
-      document.getElementById("result").innerText = data.translatedText || "翻訳に失敗しました。";
+        if (!res.ok) throw new Error("APIエラー");
+
+        const data = await res.json();
+        document.getElementById("result").innerText = data.translatedText || "翻訳に失敗しました。";
+      } catch (error) {
+        document.getElementById("result").innerText = "翻訳に失敗しました。ネットワークまたはAPIの問題かもしれません。";
+      }
     }
   </script>
 </body>
