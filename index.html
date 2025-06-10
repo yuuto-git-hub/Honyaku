@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>簡易翻訳ツール</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>簡易翻訳ツール</h1>
+
+  <textarea id="inputText" placeholder="ここにテキストを入力..."></textarea>
+  
+  <div class="buttons">
+    <button onclick="translateToEnglish()">日本語 → 英語</button>
+    <button onclick="translateToJapanese()">英語 → 日本語</button>
+  </div>
+
+  <h2>翻訳結果：</h2>
+  <div id="outputText"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
